@@ -8,6 +8,8 @@ sub set {
   my ($self, $pointer, $value) = @_;
   my $data = $self->data;
 
+  $self->data($value) if $pointer eq '/';
+
   my @segments = grep length, split '/' => $pointer;
 
   while (@segments) {
