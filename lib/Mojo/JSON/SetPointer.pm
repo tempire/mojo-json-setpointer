@@ -4,6 +4,28 @@ use Data::Dumper;
 
 our $VERSION = '0.01';
 
+sub _pointer {
+  my ($self, $get, $pointer) = @_;
+
+  my $data = $self->data;
+  return length $pointer ? undef : $get ? $data : 1 unless $pointer =~ s!^/!!;
+  for my $p (length $pointer ? (split /\//, $pointer, -1) : ($pointer)) {
+    $p =~ s!~1!/!g;
+    $p =~ s/~0/~/g;
+
+    # Hash
+    if (ref $data eq 'HASH' && exists $data->{$p}) { $data = $data->{$p} }
+
+    # Array
+    elsif (ref $data eq 'ARRAY' && $p =~ /^[\-]*\d+$/ && @$data > $p) { $data = $data->[$p] }
+
+    # Nothing
+    else { return undef }
+  }
+
+  return $get ? $data : 1;
+}
+
 sub set {
   my ($self, $pointer, $value) = @_;
   my $data = $self->data;
