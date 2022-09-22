@@ -21,6 +21,8 @@ is_deeply $hashref => { baz => [ 4, 5, 6, 7 ] }, 'new array position';
 $hashref = { baz => [ 4, 5, 6, 7 ] };
 is +Mojo::JSON::SetPointer->new($hashref)->get( '/baz/-1' ) => 7, 'negative array positions';
 
+!Mojo::JSON::SetPointer->new($hashref)->get( '/baz/--1' ), 'only one minus symbol';
+
 my $p = Mojo::JSON::SetPointer->new($hashref);
 $p->set( '/' => [qw/ new structure /]);
 is_deeply $hashref => { baz => [ 4, 5, 6, 7 ] }, 'Same ref, does not modify existing ref in this case';
