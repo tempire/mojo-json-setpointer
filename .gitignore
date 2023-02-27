@@ -1,3 +1,5 @@
 .DS_Store
 local/
 cover_db/
+.pause
+.env*

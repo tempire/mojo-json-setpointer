@@ -90,6 +90,12 @@ sub set {
 
 1;
 
+=encoding utf-8
+
+=head1 NAME
+
+Mojo::JSON::SetPointer - Mojo::JSON::SetPointer
+
 =head1 DESCRIPTION
 
 Mojo::JSON::SetPointer, extended to allow setting of values
