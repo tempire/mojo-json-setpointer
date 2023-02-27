@@ -3,3 +3,4 @@ local/
 cover_db/
 .pause
 .env*
+*.tar.gz
